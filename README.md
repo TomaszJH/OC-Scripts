@@ -1,4 +1,4 @@
-# Reactor-Control-Script
+# OC-Reactor-Control-Script
 A Reactor Control script used in conjunction with OpenComputers and Draconic Evolution Reactors
 
 NOTE! This script was only tested under Minecraft 1.7.10 and at current state it is unknown if it works in newer versions.
