@@ -177,7 +177,7 @@ end
   gpu.setForeground(0xFFFFFF);
 
   term.setCursor(10, 12);
-  term.write("Output:");
+  term.write("Gross Output:");
   term.setCursor(30, 12);
   gpu.setForeground(0xFF9200);
   ofg=outputGate.getFlow();
@@ -185,7 +185,7 @@ end
   gpu.setForeground(0xFFFFFF);
 
   term.setCursor(10, 14);
-  term.write("Gain/Loss:");
+  term.write("Net Output:");
   term.setCursor(30, 14);
   local gol = (ofg-ifg);
   if (gol < 0) then
