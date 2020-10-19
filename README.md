@@ -5,6 +5,9 @@ This script is designed to be compatible with the 1.12.2 version of the mod as w
 
 Please refer to the wiring diagram included with this repository to configure the panels correctly.
 
+# Screenshots
+![Alt-Text](/screenshots/screenshot001.png?raw=true)
+
 # Setup Guide
 1) Download this script from this repository. I reccommend to use wget inculded with the mod.
 2) Connect adapters to:
