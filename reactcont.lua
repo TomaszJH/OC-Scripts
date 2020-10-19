@@ -13,13 +13,13 @@ local colors = require('colors');
 local os = require('os')
 
 -- NOTE: Change addresses depending on what is in your setup. Use analyzer to find addresses
-local rsaddr1 = '4d918c7a-0b3a-4cea-a916-7c57098112b8';
-local rsaddr2 = '0ab7a5d5-75bd-4063-991d-eadac1640ab7';
+local rsaddr1 = 'e792c5e7-a134-4f3c-a02d-d411b53886d8';
+local rsaddr2 = 'a9ee1d1c-4735-48e0-95d0-e2ed8252f175';
 local rs1 = component.proxy(rsaddr1);
 local rs2 = component.proxy(rsaddr2);
 
-local inputAddr='422f82cd-b4a6-4ba0-b9da-3e010d214e0f';
-local outputAddr='6926c21a-b507-4b66-88b5-c03e822296f9';
+local inputAddr='4fcc6d8f-708a-452e-a333-c470be26a216';
+local outputAddr='ae9d446c-a89d-4076-ade4-88e6902e54dc';
 local inputGate=component.proxy(inputAddr);
 local outputGate=component.proxy(outputAddr);
 
@@ -63,6 +63,9 @@ end
   --enery core data
   local estored=energy.getEnergyStored();
   local ecapacity=energy.getMaxEnergyStored();
+  --lock flowgates
+  inputGate.setOverrideEnabled(true);
+  outputGate.setOverrideEnabled(true);
 
   term.setCursor(90, 8);
   term.write("Temperature");
@@ -115,23 +118,23 @@ end
   term.setCursor(10, 8);
   term.write("Status: ");
   term.setCursor(30, 8);
-  if (status == "offline") then
+  if (status == "offline") or (status == "cold") then
     gpu.setForeground(0x5A5A5A);
     term.write("Offline")
     gpu.setForeground(0xFFFFFF);
-  elseif (status == "charging") then
+  elseif (status == "charging") or ((status == "warming_up") and (temp < 2000)) then
     gpu.setForeground(0xFF9200);
     term.write("Charging");
     gpu.setForeground(0xFFFFFF);
-  elseif (status == "charged") then
+  elseif (status == "charged") or ((status == "warming_up") and (temp >= 2000)) then
     gpu.setForeground(0xFFB600);
     term.write("Ready");
     gpu.setForeground(0xFFFFFF);
-  elseif (status == "online") then
+  elseif (status == "online") or (status == "running") then
     gpu.setForeground(0x99FF00);
     term.write("Online");
     gpu.setForeground(0xFFFFFF);
-  elseif (status == "stopping") then
+  elseif (status == "stopping") or (status == "cooling") then
     gpu.setForeground(0xFF0040);
     term.write("Stopping");
     gpu.setForeground(0xFFFFFF);
@@ -193,7 +196,7 @@ end
   elseif (gol > 0) then
     gpu.setForeground(0x99FF00);
   else
-    gpu.setforeground(0xFF9200);
+    gpu.setForeground(0xFF9200);
   end
   term.write(gol .. "RF/t");
   gpu.setForeground(0xFFFFFF);
@@ -206,7 +209,7 @@ end
   gpu.setForeground(0xFFFFFF);
 
 --warnings
-  if (status == "offline") then
+  if (status == "offline") or (status == "cold") then
     term.setCursor(2 , 38);
     term.write("Reactor is Offline, thus it is not generating power");
   end
@@ -221,11 +224,11 @@ end
     term.setCursor(2, 40);
     term.write("Temperature is above 8000C, consider reducing Output power");
   end
-  if (status == "charging") then
+  if (status == "charging") or ((status == "warming_up") and (temp < 2000)) then
     term.setCursor(2, 38);
     term.write("Reactor is warming up, thus consuming power");
   end
-  if (status == "charged") then
+  if (status == "charged") or ((status == "warming_up") and (temp >= 2000)) then
     term.setCursor(2, 38);
     term.write("Reactor is ready. Activate reactor!");
   end
@@ -384,15 +387,15 @@ end
   end
   
 
-  if (status == "offline") then
+  if (status == "offline") or (status == "cold") then
     rs2.setBundledOutput(sides.top, {[colors.green] = 15, [colors.red] = 0, [colors.cyan] = 0, [colors.lime] = 0, [colors.pink] = 0});  
-  elseif (status == "stopping") then
+  elseif (status == "stopping") or (status == "cooling") then
     rs2.setBundledOutput(sides.top, {[colors.green] = 0, [colors.red] = 15, [colors.cyan] = 0, [colors.lime] = 0, [colors.pink] = 0});  
-  elseif (status == "online") then
+  elseif (status == "online") or (status == "running")  then
     rs2.setBundledOutput(sides.top, {[colors.green] = 0, [colors.red] = 0, [colors.cyan] = 15, [colors.lime] = 0, [colors.pink] = 0});  
-  elseif (status == "charging") then
+  elseif (status == "charging") or ((status == "warming_up") and (temp < 2000))  then
     rs2.setBundledOutput(sides.top, {[colors.green] = 0, [colors.red] = 0, [colors.cyan] = 0, [colors.lime] = 15, [colors.pink] = 0});  
-  elseif (status == "charged") then
+  elseif (status == "charged") or ((status == "warming_up") and (temp >= 2000)) then
     rs2.setBundledOutput(sides.top, {[colors.green] = 0, [colors.red] = 0, [colors.cyan] = 0, [colors.lime] = 0, [colors.pink] = 15});  
   else
     rs2.setBundledOutput(sides.top, {[colors.green] = 0, [colors.red] = 0, [colors.cyan] = 0, [colors.lime] = 0, [colors.pink] = 0});  
