@@ -11,10 +11,10 @@ Please refer to the wiring diagram included with this repository to configure th
 ## Setup Guide
 1) Download this script from this repository. I reccommend to use wget inculded with the mod.
 2) Connect adapters to:
-  -1 Reactor Stabilizer
-  -Input Gate
-  -Output Gate
-  -Energy Pylon
+  - 1 Reactor Stabilizer
+  - Input Gate
+  - Output Gate
+  - Energy Pylon
 3) Connect 2 Redstone interfaces. Follow wiring guide on how to assemble and connect panels
 4) Edit reactorcont.lua. Replace UUIDs located in the file with custom UUIDs of your devices.
 5) Execute ./reactorcont.lua. If something does not work, check all connections and try again.
