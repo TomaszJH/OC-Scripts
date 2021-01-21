@@ -12,14 +12,14 @@ local sides = require('sides');
 local colors = require('colors');
 local os = require('os')
 
--- NOTE: Change addresses depending on what is in your setup. Use analyzer to find addresses
-local rsaddr1 = 'e792c5e7-a134-4f3c-a02d-d411b53886d8';
-local rsaddr2 = 'a9ee1d1c-4735-48e0-95d0-e2ed8252f175';
+-- NOTE: Change addresses depending on what is in your setup otherwise it will error. Use analyzer to find addresses
+local rsaddr1 = '[ADDRESS]';
+local rsaddr2 = '[ADDRESS]';
 local rs1 = component.proxy(rsaddr1);
 local rs2 = component.proxy(rsaddr2);
 
-local inputAddr='4fcc6d8f-708a-452e-a333-c470be26a216';
-local outputAddr='ae9d446c-a89d-4076-ade4-88e6902e54dc';
+local inputAddr='[ADDRESS]';
+local outputAddr='[ADDRESS]';
 local inputGate=component.proxy(inputAddr);
 local outputGate=component.proxy(outputAddr);
 
