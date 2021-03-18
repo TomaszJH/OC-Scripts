@@ -9,7 +9,8 @@ Please refer to the wiring diagram included with this repository to configure th
 ![Alt-Text](/screenshots/screenshot001.png?raw=true)
 
 ## Setup Guide
-1) Download this script from this repository. I reccommend to use wget inculded with the mod.
+1) Download this script from this repository.\
+Use `wget https://raw.githubusercontent.com/TomaszJH/OC-Reactor-Control-Script/master/reactcont.lua`
 2) Connect adapters to:
   - 1 Reactor Stabilizer
   - Input Gate
